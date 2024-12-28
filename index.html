@@ -18,13 +18,42 @@
     </section>
     <section class="ideas-list">
       <h2>Ваші ідеї</h2>
-      <div class="idea-card">
-        <p>Це приклад вашої ідеї.</p>
+      <div id="calendar-container"></div>
+      <div id="ideas-container">
+        <!-- Нові ідеї будуть додаватися сюди -->
       </div>
     </section>
   </main>
   <footer>
     <p>&copy; 2024 Щоденник ідей</p>
   </footer>
+  <script>
+    document.getElementById('add-button').addEventListener('click', function() {
+      const ideaInput = document.getElementById('idea-input');
+      const ideaText = ideaInput.value;
+      const ideasContainer = document.getElementById('ideas-container');
+
+      if (ideaText.trim() !== '') {
+        // Створення нового блоку ідеї
+        const ideaCard = document.createElement('div');
+        ideaCard.className = 'idea-card';
+
+        const date = new Date();
+        const formattedDate = date.toLocaleDateString('uk-UA', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+
+        ideaCard.innerHTML = `<p>${ideaText}</p><span class="idea-date">Додано: ${formattedDate}</span>`;
+
+        // Додавання ідеї до контейнера
+        ideasContainer.appendChild(ideaCard);
+        
+        // Очищення поля введення
+        ideaInput.value = '';
+      }
+    });
+  </script>
 </body>
 </html>
